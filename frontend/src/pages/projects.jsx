@@ -6,6 +6,9 @@ export default function Projects() {
   const [loading, setLoading] = useState(true);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  if (backendUrl.startsWith("http://") && window.location.protocol === "https:") {
+    backendUrl = backendUrl.replace("http://", "https://");
+  }
 
   useEffect(() => {
     fetch(fetch(`${backendUrl}/projects`))
