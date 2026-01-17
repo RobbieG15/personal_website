@@ -13,7 +13,7 @@ export default ({ mode }) => {
         "/api": {
           target: backendUrl,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
+          rewrite: (path) => path.replace(/^\/api/, "/api"),
         },
       },
     },
