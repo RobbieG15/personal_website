@@ -23,11 +23,11 @@ export default function Projects() {
   return (
     <section className="full-width-section section-light">
       <div className="container">
-        <h2 style={{ marginBottom: "1.5rem" }}>Projects</h2>
+        <h1 style={{ marginBottom: "1.5rem" }}>Projects</h1>
         {projects.length === 0 ? (
           <p>No projects found.</p>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1rem" }}>
+          <div className="cards-grid">
             {projects.map((proj) => (
               <ProjectCard key={proj.id} project={proj} />
             ))}

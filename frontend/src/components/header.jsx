@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 
+import profilePic from "../assets/robbie.jpg";
+
 export default function Header() {
   const location = useLocation();
 
   const links = [
     { path: "/", label: "Home" },
     { path: "/projects", label: "Projects" },
-    { path: "/blog", label: "Blog" },
+    { path: "/blogs", label: "Blogs" },
     { path: "/contact", label: "Contact" },
     { path: "/about", label: "About" },
   ];
@@ -14,7 +16,10 @@ export default function Header() {
   return (
     <header>
       <div className="container">
-        <h1 style={{ fontSize: "1.5rem" }}>Robert Greenslade</h1>
+        <div className="header-left">
+          <img src={profilePic} alt="Robert Greenslade" className="header-profile-pic" />
+          <h1>Robert Greenslade</h1>
+        </div>
         <nav>
           {links.map((link) => (
             <Link

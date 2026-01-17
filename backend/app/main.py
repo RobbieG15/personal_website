@@ -1,20 +1,21 @@
+import os
+
 import uvicorn
 from app import models
 from app.database import engine
-from app.routers import contact, projects
+from app.routers import blogs, contact, projects
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 # Initialize Database
 # If using SQLAlchemy models, create tables
-models.projects.Base.metadata.create_all(
-    bind=engine
-)  # Uncomment if using real DB models
+models.projects.Base.metadata.create_all(bind=engine)
+models.blogs.Base.metadata.create_all(bind=engine)
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Developer Portfolio API",
+    title="Robert Greenslade Portfolio API",
     description="API backend for my software developer portfolio",
     version="1.0.0",
 )
@@ -24,10 +25,8 @@ app.mount("/uploads", StaticFiles(directory="app/uploads"), name="uploads")
 
 
 # CORS Middleware
-origins = [
-    "http://localhost:5173",  # React dev server
-    "http://127.0.0.1:5173",
-]
+BACKEND_SECRET_KEY = os.getenv("FRONTEND_HOST", "http://localhost:5173")
+origins = [BACKEND_SECRET_KEY]
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,7 +39,7 @@ app.add_middleware(
 # Include Routers
 app.include_router(projects.router, prefix="/projects", tags=["Projects"])
 app.include_router(contact.router, prefix="/contact", tags=["Contact"])
-# app.include_router(blog.router, prefix="/blog", tags=["Blog"])
+app.include_router(blogs.router, prefix="/blogs", tags=["Blogs"])
 
 
 # Root endpoint

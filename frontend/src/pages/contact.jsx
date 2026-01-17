@@ -62,7 +62,9 @@ export default function Contact() {
   return (
     <section className="full-width-section section-light contact-section">
       <div className="container contact-container">
-        <h2>Contact Me</h2>
+        <h1 style={{ marginBottom: "1.5rem" }}>
+          Contact Me 
+        </h1>
 
         <form onSubmit={handleSubmit} className="contact-form">
           <label htmlFor="name">Name</label>
