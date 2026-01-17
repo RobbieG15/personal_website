@@ -4,8 +4,10 @@ import BlogCard from "../components/blog_card";
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
-    fetch("/api/blogs")
+    fetch(`${backendUrl}/blogs`)
       .then(res => res.json())
       .then(setBlogs)
       .catch(console.error);
