@@ -26,7 +26,7 @@ app.mount("/uploads", StaticFiles(directory="app/uploads"), name="uploads")
 
 # CORS Middleware
 FRONTEND_HOST = os.getenv("FRONTEND_HOST", "http://localhost:5173")
-origins = [FRONTEND_HOST, "robertgreenslade.dev"]
+origins = [FRONTEND_HOST, "https://robertgreenslade.dev"]
 
 app.add_middleware(
     CORSMiddleware,

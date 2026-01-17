@@ -5,6 +5,8 @@ export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     fetch(fetch(`${backendUrl}/projects`))
       .then((res) => res.json())
