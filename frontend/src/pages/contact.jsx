@@ -33,7 +33,12 @@ export default function Contact() {
     setStatus({ type: "loading", message: "Sending..." });
 
     try {
-      const response = await fetch("/api/contact", {
+
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      if (backendUrl.startsWith("http://") && window.location.protocol === "https:") {
+        backendUrl = backendUrl.replace("http://", "https://");
+      }
+      const response = await fetch(`${backendUrl}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
