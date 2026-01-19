@@ -5,9 +5,6 @@ export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  if (backendUrl.startsWith("http://") && window.location.protocol === "https:") {
-    backendUrl = backendUrl.replace("http://", "https://");
-  }
 
   useEffect(() => {
     fetch(`${backendUrl}/blogs`)
