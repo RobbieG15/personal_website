@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 
 import uvicorn
 from app import models
@@ -7,7 +6,6 @@ from app.database import engine
 from app.routers import blogs, contact, projects
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 # Initialize Database
@@ -22,17 +20,6 @@ app = FastAPI(
     version="1.0.0",
     redirect_slashes=False,
 )
-
-IS_PROD = os.getenv("PROD") == "1"
-
-if IS_PROD:
-    frontend_build_path = Path(__file__).parent / "frontend" / "dist"
-    app.mount("/", StaticFiles(directory=frontend_build_path), name="frontend")
-
-    @app.get("/{full_path:path}")
-    def catch_all(full_path: str):
-        # Always serve index.html for any route
-        return FileResponse(frontend_build_path / "index.html")
 
 
 # serve uploaded images
