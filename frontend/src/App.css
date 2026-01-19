@@ -187,6 +187,7 @@ footer .container {
    ========================= */
 .full-width-section {
   width: 100%;
+  min-height: calc(100vh - 120px);
   padding: 6.5rem 0; /* vertical padding only */
 }
 
