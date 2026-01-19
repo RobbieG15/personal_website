@@ -7,7 +7,7 @@ export default function Blogs() {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    fetch(`${backendUrl}/blogs`)
+    fetch(`${backendUrl}/blogs/`)
       .then(res => res.json())
       .then(setBlogs)
       .catch(console.error);
