@@ -18,6 +18,7 @@ app = FastAPI(
     title="Robert Greenslade Portfolio API",
     description="API backend for my software developer portfolio",
     version="1.0.0",
+    redirect_slashes=False,
 )
 
 # serve uploaded images
