@@ -1,11 +1,12 @@
 from app.schemas.contact import ContactRequest
 from app.utils.email import send_contact_email
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
 
-@router.post("/", status_code=status.HTTP_204_NO_CONTENT)
+@router.post("/")
 def submit_contact_form(payload: ContactRequest):
     try:
         send_contact_email(
@@ -14,8 +15,10 @@ def submit_contact_form(payload: ContactRequest):
             contact_type=payload.contactType,
             message=payload.message,
         )
+        return JSONResponse(
+            status_code=200, content={"message": "Email sent successfully!"}
+        )
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to send contact message",
-        ) from e
+        return JSONResponse(
+            status_code=500, content={"message": f"Failed to send email: {str(e)}"}
+        )
